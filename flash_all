@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# bulk flash to each teensy connected to the main controller
+
+function flash_all() {
+	./upload stage1
+	sleep .1
+	./upload stage2
+	sleep .1
+	./upload stage3
+}
+flash_all
