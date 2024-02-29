@@ -1,0 +1,12 @@
+#!/bin/bash
+function upload() {
+	serialnum=$(cat $1.sn) 
+	echo "Retrieved serial number $serialnum from $1.sn"
+	./teensy_loader_cli --mcu=TEENSY41 --serial-number=$serialnum -s -w -v $1.hex
+}
+upload $1
+if [ "$?" != "0" ]; then
+	# Failed to upload, retry
+	echo "Error flashing to $1, attempting to retry"
+	upload $1
+fi	
